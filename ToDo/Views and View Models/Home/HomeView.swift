@@ -19,11 +19,15 @@ struct HomeView: View {
                     completionStatusSection
                     todoListSection
                 }
+                .listItemTint(Color.beige)
+                .listStyle(.plain)
             }
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarBackground(Color.beige, for: .tabBar)
+            .background(Color.beige)
             .onAppear {
                 viewModel.onAction(.getTodoList)
             }
-            .listStyle(.plain)
             .sheet(isPresented: $viewModel.state.showAddTodoView, onDismiss: {
                 viewModel.onAction(.getTodoList)
             }) {

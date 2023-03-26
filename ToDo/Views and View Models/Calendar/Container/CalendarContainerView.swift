@@ -14,15 +14,21 @@ struct CalendarContainerView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                CalendarView(viewModel: viewModel)
-                
-                if viewModel.state.selectedDate != nil {
-                    selectedDateTodoList
+                Group {
+                    CalendarView(viewModel: viewModel)
+                    
+                    if viewModel.state.selectedDate != nil {
+                        selectedDateTodoList
+                    }
                 }
             }
             .onAppear {
                 viewModel.onAction(.getTodoList)
             }
+            .toolbarBackground(Color.beige, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarBackground(Color.beige, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     addButton

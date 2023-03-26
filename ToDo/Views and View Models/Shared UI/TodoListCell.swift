@@ -29,7 +29,7 @@ struct TodoListCell: View {
             Spacer()
             displayedFlag
         }
-        .foregroundColor(todo.isCompleted ? .deepRed : .black)
+        .foregroundColor(todo.isCompleted ? .deepRed : .primary)
         .frame(maxWidth: .infinity)
     }
     

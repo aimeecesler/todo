@@ -33,7 +33,7 @@ struct TodoDetailsView: View {
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
-            .padding(.horizontal, 16)
+            .padding(16)
             .sheet(isPresented: $viewModel.state.showEditTodoView, onDismiss: {
                 viewModel.onAction(.refreshDetails)
             }) {
@@ -41,6 +41,10 @@ struct TodoDetailsView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .toolbarBackground(Color.beige, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarBackground(.visible, for: .tabBar)
+        .toolbarBackground(Color.beige, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -59,14 +63,13 @@ struct TodoDetailsView: View {
             .bold()
             .kerning(2)
             .font(.largeTitle)
-            .foregroundColor(todo.isCompleted ? .red : .black)
     }
     
     // MARK: Details
     private var detailsView: some View {
         Text(todo.details)
             .font(.title2)
-            .foregroundColor(.gray)
+            .foregroundColor(.secondary)
     }
     
     // MARK: Categories
@@ -126,7 +129,6 @@ struct TodoDetailsView: View {
                 .kerning(2)
         }
         .disabled(viewModel.editButtonIsDisabled)
-        .foregroundColor(.black)
         .buttonStyle(.bordered)
     }
     
@@ -135,7 +137,7 @@ struct TodoDetailsView: View {
             presentationMode.wrappedValue.dismiss()
         }) {
             Image.chevronLeft
-        }.foregroundColor(.black)
+        }.foregroundColor(.primary)
     }
 }
 
