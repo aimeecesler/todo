@@ -12,14 +12,13 @@ struct TodoListCell: View {
     
     private let dateFormatter = CustomDateFormatter()
     
+    // MARK: Body
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 Text(todo.title)
                 Text("Created: \(dateFormatter.getShortDateString(todo.createdOn))")
-                if let dueDate = todo.dueDate, !todo.isCompleted, !todo.dueToday {
-                    Text("Due: \(dateFormatter.getShortDateString(dueDate))")
-                }
+                Text("Due: \(dateFormatter.getShortDateString(todo.dueDate))")
                 
                 HStack {
                     ForEach(todo.categories, id: \.hashValue) { category in
@@ -28,15 +27,15 @@ struct TodoListCell: View {
                 }
             }
             Spacer()
-            
             displayedFlag
         }
         .foregroundColor(todo.isCompleted ? .red : .black)
         .frame(maxWidth: .infinity)
     }
     
+    // MARK: Flags
     @ViewBuilder
-    var displayedFlag: some View {
+    private var displayedFlag: some View {
         if todo.isCompleted {
             completedFlag
         } else if todo.dueToday {
@@ -46,19 +45,19 @@ struct TodoListCell: View {
         }
     }
     
-    var completedFlag: some View {
-        flag(text: "Completed", color: .black)
+    private var completedFlag: some View {
+        buildFlag(text: "Completed", color: .black)
     }
     
-    var overdueFlag: some View {
-        flag(text: "Overdue", color: .red)
+    private var overdueFlag: some View {
+        buildFlag(text: "Overdue", color: .red)
     }
     
-    var dueTodayFlag: some View {
-        flag(text: "Due Today", color: .mint)
+    private var dueTodayFlag: some View {
+        buildFlag(text: "Due Today", color: .mint)
     }
     
-    func flag(text: String, color: Color) -> some View {
+    private func buildFlag(text: String, color: Color) -> some View {
         Text(text)
             .bold()
             .foregroundColor(.white)
@@ -75,6 +74,7 @@ struct TodoListCell_Previews: PreviewProvider {
                                      title: "Test",
                                      details: "Details",
                                      categories: [.home, .work, .kids, .shopping, .pets],
+                                     dueDate: Date.now,
                                      createdOn: Date.now))
             TodoListCell(todo: .init(id: "12345",
                                      title: "Test",

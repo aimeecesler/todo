@@ -11,7 +11,7 @@ struct CategoryIconView: View {
     var category: TodoCategory
     var size: CGFloat = 30
     
-    var color: Color {
+    private var color: Color {
         switch category {
         case .home:
             return .pink
@@ -26,7 +26,7 @@ struct CategoryIconView: View {
         }
     }
     
-    var icon: String {
+    private var icon: String {
         switch category {
         case .home:
             return "house"

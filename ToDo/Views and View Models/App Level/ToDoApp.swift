@@ -27,7 +27,7 @@ struct ToDoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabContentView()
                 .environmentObject(todoCache)
         }
     }

@@ -1,45 +1,46 @@
 {
-    "todos": [
-        {
-            "uid": "d48d71be-cb3a-11ed-afa1-0242ac120002",
+    "todos": {
+        "d48d71be-cb3a-11ed-afa1-0242ac120002": {
+            "id": "d48d71be-cb3a-11ed-afa1-0242ac120002",
             "title": "Soccer Practice",
             "details": "Pick up snacks for the kid's soccer practice on Saturday.",
             "categories": ["Kids/Family", "Shopping/Expenses"],
-            "dueDate": "2023-03-24T18:21:21+0000",
+            "dueDate": "2023-03-24T04:00:00+0000",
             "createdOn": "2023-03-24T18:21:21+0000"
         },
-        {
-            "uid": "d48d760a-cb3a-11ed-afa1-0242ac120002",
+        "d48d760a-cb3a-11ed-afa1-0242ac120002": {
+            "id": "d48d760a-cb3a-11ed-afa1-0242ac120002",
             "title": "Fido's Appt",
             "details": "Call the vet to get Fido's annual appointment scheduled.",
             "categories": ["Pets"],
-            "dueDate": "2023-03-29T18:21:21+0000",
+            "dueDate": "2023-03-29T04:00:00+0000",
             "createdOn": "2023-03-25T18:21:21+0000"
         },
-        {
-            "uid": "d48d77fe-cb3a-11ed-afa1-0242ac120002",
+        "d48d77fe-cb3a-11ed-afa1-0242ac120002": {
+            "id": "d48d77fe-cb3a-11ed-afa1-0242ac120002",
             "title": "Schedule Meeting",
-            "details": "Contact Mr. Jone's assitant to schedule a budget meeting next week.",
+            "details": "Contact Mr. Jone's assistant to schedule a budget meeting next week.",
             "categories": ["Work"],
-            "dueDate": "2023-03-23T18:21:21+0000",
+            "dueDate": "2023-03-23T04:00:00+0000",
             "completedOn": "2023-03-24T18:21:21+0000",
             "createdOn": "2023-03-23T18:21:21+0000"
         },
-        {
-            "uid": "d48d7a06-cb3a-11ed-afa1-0242ac120002",
+        "d48d7a06-cb3a-11ed-afa1-0242ac120002": {
+            "id": "d48d7a06-cb3a-11ed-afa1-0242ac120002",
             "title": "Groceries",
             "details": "Make this week's grocery list and go grocery shopping.",
             "categories": ["Home", "Shopping/Expenses"],
-            "dueDate": "2023-03-25T18:21:21+0000",
+            "dueDate": "2023-03-25T04:00:00+0000",
             "completedOn": "2023-03-25T18:21:21+0000",
             "createdOn": "2023-03-23T18:21:21+0000"
         },
-        {
-            "uid": "d48d7be6-cb3a-11ed-afa1-0242ac120002",
+        "d48d7be6-cb3a-11ed-afa1-0242ac120002": {
+            "id": "d48d7be6-cb3a-11ed-afa1-0242ac120002",
             "title": "Bathroom Reno",
             "details": "Research renovation companies for our master bathroom renovation.",
             "categories": ["Home"],
+            "dueDate": "2023-04-30T04:00:00+0000",
             "createdOn": "2023-03-22T18:21:21+0000"
         }
-    ]
+    }
 }

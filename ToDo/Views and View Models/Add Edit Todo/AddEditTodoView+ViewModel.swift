@@ -6,64 +6,73 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension AddEditTodoView {
-    class ViewModel: ObservableObject {
+    class ViewModel: ViewModelProtocol {
         @Published var state: ViewState
         var todoService: TodoService
         let todoCache = TodoListCache.shared
 
         var isNew: Bool
         
+        // MARK: Computed Vars
         var disableInputs: Bool {
             state.loadingState != .idle
         }
         
+        var navigationTitle: String {
+            isNew ? "Add New To Do" : "Edit To Do"
+        }
+        
+        // MARK: Init
         init(_ todo: Todo? = nil, todoService: TodoService = .init()) {
             self.isNew = todo == nil
             self.state = .init(todo: todo ?? .init(id: UUID().uuidString,
-                                                   title: "",
-                                                   details: "",
-                                                   categories: [],
-                                                   createdOn: Date.now),
-                               validationState: .init(titleIsValid: todo?.title.isEmpty ?? false,
-                                                      detailIsValid: todo?.details.isEmpty ?? false),
-                               showDueDatePicker: todo?.dueDate != nil)
+                                                   dueDate: Date.now,
+                                                   createdOn: Date.now))
             self.todoService = todoService
         }
         
+        // MARK: On Action
         func onAction(_ action: Action) {
             switch action {
-            case .saveTask:
+            case .validateTitle:
+                state.validationState.titleIsValid = !state.todo.title.isEmpty
+            case .validateDetails:
+                state.validationState.detailIsValid = !state.todo.details.isEmpty
+            case .saveTodo:
                 validateTask()
                 if state.validationState.isValid {
                     saveTask()
                 }
-            case .saveTaskSuccess:
+            case .saveTodoSuccess:
                 saveTaskSuccess()
-            case .saveTaskFailure:
+            case .saveTodoFailure:
                 saveTaskFailure()
             case .addRemoveTodoCategory(let category):
                 addRemoveTodoCategory(category)
-            case .toggleDueDatePicker:
-                toggleDueDatePicker()
             }
         }
         
+        // MARK: Save
         private func saveTask() {
+            // Resigning the first responder
+            UIApplication.shared.sendAction(
+                  #selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil
+            )
             state.loadingState = .loading
-            // If a due date has been selected, set the time to the last minute of the day
-            if let date = state.todo.dueDate {
-                state.todo.dueDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date)
-            }
+            
+            // Setting due date to start of day for consistency
+            state.todo.dueDate = state.todo.dueDate.startOfDay
             
             todoService.upsertTodo(state.todo) { error in
                 guard error == nil else {
-                    self.onAction(.saveTaskFailure)
+                    self.onAction(.saveTodoFailure)
                     return
                 }
                 
-                self.onAction(.saveTaskSuccess)
+                self.onAction(.saveTodoSuccess)
             }
         }
         
@@ -78,11 +87,13 @@ extension AddEditTodoView {
             state.showErrorAlert = true
         }
         
+        // MARK: Validation Actions
         private func validateTask() {
             state.validationState.titleIsValid = !state.todo.title.isEmpty
             state.validationState.detailIsValid = !state.todo.details.isEmpty
         }
         
+        // MARK: Data Actions
         private func addRemoveTodoCategory(_ category: TodoCategory) {
             if state.todo.categories.contains(category) {
                 state.todo.categories.removeAll(where: { $0 == category })
@@ -90,40 +101,35 @@ extension AddEditTodoView {
                 state.todo.categories.append(category)
             }
         }
-        
-        private func toggleDueDatePicker() {
-            state.showDueDatePicker.toggle()
-            if state.showDueDatePicker == false {
-                // Clear out the due date when hiding the picker
-                state.todo.dueDate = nil
-            }
-        }
     }
     
+    // MARK: View State
     struct ViewState {
         var todo: Todo
         var loadingState: LoadingState = .idle
-        var validationState: ValidationState
+        var validationState: ValidationState = .init()
         
         // UI Triggers
-        var showDueDatePicker: Bool
         var showErrorAlert: Bool = false
     }
     
+    // MARK: Validation State
     struct ValidationState {
-        var titleIsValid: Bool
-        var detailIsValid: Bool
+        var titleIsValid: Bool = true
+        var detailIsValid: Bool = true
         
         var isValid: Bool {
             titleIsValid && detailIsValid
         }
     }
     
+    // MARK: Action
     enum Action {
-        case saveTask
-        case saveTaskSuccess
-        case saveTaskFailure
+        case validateTitle
+        case validateDetails
+        case saveTodo
+        case saveTodoSuccess
+        case saveTodoFailure
         case addRemoveTodoCategory(_ category: TodoCategory)
-        case toggleDueDatePicker
     }
 }

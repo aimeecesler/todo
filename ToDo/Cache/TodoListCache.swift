@@ -10,7 +10,8 @@ import Foundation
 class TodoListCache: ObservableObject {
     static let shared = TodoListCache()
     
-    @Published var todoList: [Todo] = []
+    private var todoList: [Todo] = []
+    
     @Published private var cacheIsDirty: Bool = false
     
     func markAsDirty() {

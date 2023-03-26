@@ -8,85 +8,149 @@
 import SwiftUI
 
 struct AddEditTodoView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     @StateObject var viewModel: ViewModel
     
-    // Allows for optional due date in DatePicker
-    var passthroughDueDate: Binding<Date> {
-        Binding<Date>(
-            get: { viewModel.state.todo.dueDate ?? Date()},
-            set: { viewModel.state.todo.dueDate = $0 }
-        )
-    }
-    
+    // MARK: Body
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Title (required)") {
-                    TextField("Title",
-                              text: $viewModel.state.todo.title,
-                              prompt: Text("Enter Title..."))
+            VStack {
+                Form {
+                    titleSection
+                    detailsSection
+                    dueDateSection
+                    categoriesSection
                 }
+                .disabled(viewModel.disableInputs)
                 
-                Section("Details (required)") {
-                    TextEditor(text: $viewModel.state.todo.details)
-                        .frame(height: 200)
-                }
-                
-                Section("Due Date") {
-                    Button(action: {
-                        viewModel.onAction(.toggleDueDatePicker)
-                    }) {
-                        Label(viewModel.state.showDueDatePicker ? "Remove Due Date" : "Add a Due Date",
-                              systemImage: viewModel.state.showDueDatePicker ? "minus" : "plus")
-                    }.buttonStyle(.plain)
-                    
-                    if viewModel.state.showDueDatePicker {
-                        DatePicker("",
-                                   selection: passthroughDueDate,
-                                   displayedComponents: .date)
-                        .datePickerStyle(.graphical)
-                    }
-                }
-                
-                Section("Categories") {
-                    ForEach(TodoCategory.allCases, id: \.hashValue) { category in
-                        HStack {
-                            Text(category.rawValue)
-                            Spacer()
-                            Image(systemName: viewModel.state.todo.categories.contains(category) ? "checkmark.square" : "square")
-                                .onTapGesture {
-                                    viewModel.onAction(.addRemoveTodoCategory(category))
-                                }
-                        }
-                    }
-                }
-                
-                Button(action: {
-                    viewModel.onAction(.saveTask)
-                }, label: {
-                    Text("SAVE")
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, 32)
-                        .font(.title3)
-                        .kerning(2)
-                })
-                .buttonStyle(.borderedProminent)
-                .tint(.green)
-                .frame(maxWidth: .infinity)
+                saveButton
             }
-            .disabled(viewModel.disableInputs)
-            .navigationTitle(viewModel.isNew ? "Add New To Do" : "Edit To Do")
+            .navigationTitle(viewModel.navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                    }.buttonStyle(.plain)
+                    dismissButton
                 }
             }
+            .alert("Whoops!", isPresented: $viewModel.state.showErrorAlert, actions: {
+                alertActions
+            }, message: {
+                alertMessage
+            })
+            .onChange(of: viewModel.state.loadingState) { state in
+                if state == .loaded {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        }
+    }
+    
+    // MARK: Title
+    private var titleSection: some View {
+        Section(content: {
+            TextField("Title",
+                      text: $viewModel.state.todo.title,
+                      prompt: Text("Enter Title..."))
+        }, header: {
+            Text("Title*")
+        }, footer: {
+            Text(viewModel.state.validationState.titleIsValid ? "" : "Title is required.")
+                .foregroundColor(.red)
+        })
+        .onChange(of: viewModel.state.todo.title) { _ in
+            viewModel.onAction(.validateTitle)
+        }
+    }
+    
+    // MARK: Details
+    private var detailsSection: some View {
+        Section(content: {
+            TextEditor(text: $viewModel.state.todo.details)
+                .frame(height: 200)
+        }, header: {
+            Text("Details*")
+        }, footer: {
+            Text(viewModel.state.validationState.detailIsValid ? "" : "Details are required.")
+                .foregroundColor(.red)
+        })
+        .onChange(of: viewModel.state.todo.details) { _ in
+            viewModel.onAction(.validateDetails)
+        }
+    }
+    
+    // MARK: Due Date
+    private var dueDateSection: some View {
+        Section("Due Date*") {
+            DatePicker("",
+                       selection: $viewModel.state.todo.dueDate,
+                       displayedComponents: .date)
+            .datePickerStyle(.graphical)
+        }
+    }
+    
+    // MARK: Categories
+    private var categoriesSection: some View {
+        Section("Categories") {
+            ForEach(TodoCategory.allCases, id: \.hashValue) { category in
+                HStack {
+                    Text(category.rawValue)
+                    Spacer()
+                    Image(systemName: viewModel.state.todo.categories.contains(category) ? "checkmark.square" : "square")
+                        .onTapGesture {
+                            viewModel.onAction(.addRemoveTodoCategory(category))
+                        }
+                }
+            }
+        }
+    }
+    
+    // MARK: Save Button
+    private var saveButton: some View {
+        Button(action: {
+            viewModel.onAction(.saveTodo)
+        }, label: {
+            Text("SAVE")
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .font(.title3)
+                .bold()
+                .kerning(2)
+        })
+        .buttonBorderShape(.capsule)
+        .buttonStyle(.borderedProminent)
+        .tint(.mint)
+        .frame(maxWidth: .infinity)
+        .padding(.bottom, 8)
+    }
+    
+    // MARK: Toolbar Buttons
+    private var dismissButton: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "xmark")
+        }.buttonStyle(.plain)
+    }
+    
+    // MARK: Alert
+    private var alertMessage: some View {
+        Text("Something seems to have gone wrong saving your todo.")
+            .multilineTextAlignment(.center)
+    }
+    
+    @ViewBuilder
+    private var alertActions: some View {
+        Button("Cancel",
+               role: .cancel,
+               action: {
+            presentationMode.wrappedValue.dismiss()
+        })
+        
+        Button(action: {
+            viewModel.onAction(.saveTodo)
+        }) {
+            Text("Try Again")
+                .foregroundColor(.red)
         }
     }
 }

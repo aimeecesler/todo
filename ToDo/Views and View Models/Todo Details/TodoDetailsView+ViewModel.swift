@@ -8,20 +8,19 @@
 import Foundation
 
 extension TodoDetailsView {
-    class ViewModel: ObservableObject {
+    class ViewModel: ViewModelProtocol {
         @Published var state: ViewState
+        private var todoService: TodoService
         
         private let dateFormatter = CustomDateFormatter()
         
+        // MARK: Computed Vars
         var dueDateString: String {
-            guard let dueDate = state.todo.dueDate else { return "" }
-            return dateFormatter.getShortDateString(dueDate)
+            dateFormatter.getShortDateString(state.todo.dueDate)
         }
         
         var dueDateMessage: String {
-            guard let dueDate = state.todo.dueDate else { return "" }
-            
-            let daysFromToday = dueDate.daysFromToday
+            let daysFromToday = state.todo.dueDate.daysFromToday
             if state.todo.dueToday {
                 return "Due Today!"
             } else if daysFromToday > 0 {
@@ -37,29 +36,42 @@ extension TodoDetailsView {
             state.loadingState != .loaded
         }
         
-        init(_ todo: Todo) {
+        // MARK: Init
+        init(_ todo: Todo, todoService: TodoService = .init()) {
             self.state = .init(todo: todo)
+            self.todoService = todoService
         }
         
+        // MARK: OnAction
         func onAction(_ action: Action) {
             switch action {
             case .refreshDetails:
                 getTodoDetails()
             case .showEditDetailsView:
                 state.showEditTodoView = true
-            case .detailsRefreshSuccess:
+            case .detailsRefreshSuccess(let todo):
+                state.todo = todo
                 state.loadingState = .loaded
             case .detailsRefreshFailure:
                 state.loadingState = .error
             }
         }
         
+        // MARK: GET Actions
         private func getTodoDetails() {
             state.loadingState = .loading
-            // TODO: ADD API LOGIC TO GET TODO DETAILS
+            todoService.getTodoDetails(for: state.todo.id) { error, todo in
+                guard let todo = todo else {
+                    self.onAction(.detailsRefreshFailure)
+                    return
+                }
+                
+                self.onAction(.detailsRefreshSuccess(todo))
+            }
         }
     }
     
+    // MARK: ViewState
     struct ViewState {
         var todo: Todo
         var loadingState: LoadingState = .loaded
@@ -68,9 +80,10 @@ extension TodoDetailsView {
         var showEditTodoView: Bool = false
     }
     
+    // MARK: Action
     enum Action {
         case refreshDetails
-        case detailsRefreshSuccess
+        case detailsRefreshSuccess(_ todo: Todo)
         case detailsRefreshFailure
         case showEditDetailsView
     }

@@ -16,7 +16,7 @@ class TodoService {
     
     private lazy var encoder: JSONEncoder = {
         let e = JSONEncoder()
-        e.dateEncodingStrategy = .deferredToDate
+        e.dateEncodingStrategy = .iso8601
         return e
     }()
     
@@ -34,14 +34,18 @@ class TodoService {
         databasePath
             .observeSingleEvent(of: .value,
                                 with:  { snapshot in
-            guard let json = snapshot.value as? NSArray else {
+            guard let json = snapshot.value as? NSDictionary else {
+                // Snapshot value is nil for empty response
+                completion(nil, [])
                 return
             }
             
             do {
                 let listData = try  JSONSerialization.data(withJSONObject: json)
-                let decodedList = try self.decoder.decode([Todo].self, from: listData)
-                completion(nil, decodedList)
+                let decodedObject = try self.decoder.decode([String: Todo].self, from: listData)
+                let list = decodedObject.map { $0.value }
+                
+                completion(nil, list)
             } catch let encodingError as NSError {
                 completion(encodingError, nil)
             }
@@ -55,9 +59,7 @@ class TodoService {
         databasePath?
             .child(id)
             .observeSingleEvent(of: .value, with: { snapshot in
-                print(snapshot.value)
                 guard let json = snapshot.value as? NSDictionary else {
-                    print("Problem getting json")
                     return
                 }
                 
@@ -74,21 +76,32 @@ class TodoService {
     }
     
     func upsertTodo(_ todo: Todo, completion: @escaping (Error?) -> Void) {
-        guard let encodedData = try? encoder.encode(todo) else {
-            return
-        }
-        
-        databasePath?.child(todo.id).setValue(encodedData,
-                                              withCompletionBlock: { error, _ in
+        do {
+            let encodedData = try encoder.encode(todo)
+            let json = try JSONSerialization.jsonObject(with: encodedData)
+            databasePath?.child(todo.id).setValue(json,
+                                                  withCompletionBlock: { error, _ in
+                completion(error)
+            })
+        } catch let error as NSError {
             completion(error)
-        })
+        }
     }
     
-    func deleteTodo(_ todo: Todo) {
-        
+    func deleteTodo(_ todo: Todo, completion: @escaping (Error?) -> Void) {
+        databasePath?.child(todo.id).removeValue() { error, _ in
+            completion(error)
+        }
     }
     
-    func completeTodo(_ todo: Todo) {
-        
+    func completeTodo(_ todo: Todo, completion: @escaping (Error?, Todo?) -> Void) {
+        databasePath?.child("\(todo.id)/completedOn").setValue(todo.completedOn?.ISO8601Format()) { error, _ in
+            guard let error = error else {
+                completion(nil, todo)
+                return
+            }
+            
+            completion(error, nil)
+        }
     }
 }

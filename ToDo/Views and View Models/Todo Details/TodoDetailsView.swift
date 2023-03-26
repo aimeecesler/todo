@@ -8,69 +8,28 @@
 import SwiftUI
 
 struct TodoDetailsView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     @StateObject var viewModel: ViewModel
     
     // UI Shortcut Reference
-    var todo: Todo {
+    private var todo: Todo {
         viewModel.state.todo
     }
     
+    // MARK: Body
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text(todo.title)
-                    .bold()
-                    .kerning(2)
-                    .font(.largeTitle)
-                    .foregroundColor(todo.isCompleted ? .red : .black)
-                Text(todo.details)
-                    .font(.title2)
-                    .foregroundColor(.gray)
+                titleView
+                detailsView
+                categoriesView
                 
-                HStack {
-                    ForEach(todo.categories, id: \.hashValue) {
-                        CategoryIconView(category: $0, size: 60)
-                    }
-                }
-                .padding(.vertical, 26)
-                .frame(maxWidth: .infinity)
-                
-                if todo.dueDate != nil, !todo.isCompleted {
-                    CardView(backgroundColor: .mint) {
-                        HStack(spacing: 16) {
-                            Image(systemName: "clock.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                            VStack(alignment: .leading) {
-                                Text(viewModel.dueDateString)
-                                    .font(.title)
-                                    .bold()
-                                Text(viewModel.dueDateMessage)
-                                    .font(.title2)
-                            }
-                        }
-                        .padding(16)
-                        .foregroundColor(.white)
-                    }
-                    .frame(height: 150)
+                if !todo.isCompleted {
+                    dueDateCard
                 }
                 
                 if todo.isCompleted {
-                    CardView(backgroundColor: .pink) {
-                        HStack(spacing: 16) {
-                            Image(systemName: "party.popper")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                            Text("Completed!")
-                                .font(.title)
-                                .bold()
-                        }
-                        .padding(16)
-                        .foregroundColor(.white)
-                    }
+                    completedCard
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
@@ -85,25 +44,98 @@ struct TodoDetailsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    viewModel.onAction(.showEditDetailsView)
-                }) {
-                    Text("EDIT")
-                        .kerning(2)
-                }
-                .disabled(viewModel.editButtonIsDisabled)
-                .foregroundColor(.black)
-                .buttonStyle(.bordered)
+                editButton
             }
             
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "chevron.left")
-                }.foregroundColor(.black)
+                backButton
             }
         }
+    }
+    
+    // MARK: Title
+    private var titleView: some View {
+        Text(todo.title)
+            .bold()
+            .kerning(2)
+            .font(.largeTitle)
+            .foregroundColor(todo.isCompleted ? .red : .black)
+    }
+    
+    // MARK: Details
+    private var detailsView: some View {
+        Text(todo.details)
+            .font(.title2)
+            .foregroundColor(.gray)
+    }
+    
+    // MARK: Categories
+    private var categoriesView: some View {
+        HStack {
+            ForEach(todo.categories, id: \.hashValue) {
+                CategoryIconView(category: $0, size: 60)
+            }
+        }
+        .padding(.vertical, 26)
+        .frame(maxWidth: .infinity)
+    }
+    
+    // MARK: Cards
+    private var dueDateCard: some View {
+        CardView(backgroundColor: .mint) {
+            HStack(spacing: 16) {
+                Image(systemName: "clock.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                VStack(alignment: .leading) {
+                    Text(viewModel.dueDateString)
+                        .font(.title)
+                        .bold()
+                    Text(viewModel.dueDateMessage)
+                        .font(.title2)
+                }
+            }
+            .padding(16)
+            .foregroundColor(.white)
+        }
+    }
+    
+    private var completedCard: some View {
+        CardView(backgroundColor: .pink) {
+            HStack(spacing: 16) {
+                Image(systemName: "party.popper")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                Text("Completed!")
+                    .font(.title)
+                    .bold()
+            }
+            .padding(16)
+            .foregroundColor(.white)
+        }
+    }
+    
+    // MARK: Toolbar Buttons
+    private var editButton: some View {
+        Button(action: {
+            viewModel.onAction(.showEditDetailsView)
+        }) {
+            Text("EDIT")
+                .kerning(2)
+        }
+        .disabled(viewModel.editButtonIsDisabled)
+        .foregroundColor(.black)
+        .buttonStyle(.bordered)
+    }
+    
+    private var backButton: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "chevron.left")
+        }.foregroundColor(.black)
     }
 }
 

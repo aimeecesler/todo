@@ -8,16 +8,13 @@
 import Foundation
 
 extension HomeView {
-    class ViewModel: ObservableObject {
+    class ViewModel: ViewModelProtocol {
         @Published var state: ViewState
-        let todoCache = TodoListCache.shared
-        let todoService: TodoService
         
-        // NOT SURE IF THIS IS REALLY NEEDED
-//        var disableSwipe: Bool {
-//            state.loadingState != .loaded || state.updateTaskLoadingState != .idle
-//        }
-                
+        private let todoCache = TodoListCache.shared
+        private let todoService: TodoService
+        
+        // MARK: Computed Vars
         private var completedCount: Double {
             Double(state.todoList.filter { $0.isCompleted }.count)
         }
@@ -30,8 +27,7 @@ extension HomeView {
         var onTimeCompletionRate: Double {
             let completedOnTime = state.todoList.filter {
                 guard let completedDate = $0.completedOn else { return false }
-                // If there was no due date, then it is always completed on time - default due date to completed date
-                return completedDate <= $0.dueDate ?? completedDate
+                return completedDate <= $0.dueDate
             }
             
             let completion = Double(completedOnTime.count) / completedCount * 100
@@ -39,11 +35,13 @@ extension HomeView {
             return completion.isNaN ? 0.0 : completion
         }
         
+        // MARK: Init
         init(todoService: TodoService = .init()) {
             self.state = .init()
             self.todoService = todoService
         }
         
+        // MARK: OnAction
         func onAction(_ action: Action) {
             switch action {
             case .getTodoList:
@@ -57,9 +55,12 @@ extension HomeView {
                 state.loadingState = .error
             case .completeTodo(let todo):
                 completeTodo(todo)
+            case .showAddTodoView:
+                state.showAddTodoView = true
             }
         }
         
+        // MARK: GET Actions
         private func getTodoList() {
             guard let todos = todoCache.getTodoList() else {
                 getTodoListFromServer()
@@ -72,7 +73,7 @@ extension HomeView {
         private func getTodoListFromServer() {
             state.loadingState = .loading
             
-            todoService.getTodoList { [weak self] error, list in
+            todoService.getTodoList { [weak self] _, list in                
                 guard let list = list else {
                     self?.onAction(.todoListFailure)
                     return
@@ -87,43 +88,48 @@ extension HomeView {
             }
         }
         
+        // MARK: DELETE Actions
         private func deleteTodo(_ todo: Todo) {
-            state.updateTaskLoadingState = .loading
-            print("----DELETE----")
-            print(todo.id)
-            // TODO: ADD DELETE FUNCTIONALITY HERE
+            todoService.deleteTodo(todo) { error in
+                self.state.todoList.removeAll(where: { $0 == todo })
+            }
             
-            // Mark cache as dirty on successful save to trigger update on other views
+            // Mark cache as dirty on save to trigger update
             todoCache.markAsDirty()
         }
         
+        // MARK: UPDATE Actions
         private func completeTodo(_ todo: Todo) {
-            state.updateTaskLoadingState = .loading
-            
-            todoService.getTodoDetails(for: todo.id) { error, todo in
-                print(error)
-                print(todo)
+            var newTodo = todo
+            newTodo.completedOn = .now
+            todoService.completeTodo(newTodo) { _, updatedTodo in
+                if let updatedTodo = updatedTodo,
+                   let i = self.state.todoList.firstIndex(of: todo){
+                    self.state.todoList[i] = updatedTodo
+                }
             }
-            print("----COMPLETE----")
-            print(todo.id)
-            // TODO: ADD COMPLETE FUNCTIONALITY HERE
             
-            // Mark cache as dirty on successful save to trigger update on other views
+            // Mark cache as dirty on save to trigger update
             todoCache.markAsDirty()
         }
     }
     
+    // MARK: ViewState
     struct ViewState {
         var todoList: [Todo] = []
         var loadingState: LoadingState = .loading
-        var updateTaskLoadingState: LoadingState = .idle
+        
+        // UI Triggers
+        var showAddTodoView: Bool = false
     }
     
+    // MARK: Action
     enum Action {
         case getTodoList
         case todoListSuccess(_ list: [Todo])
         case todoListFailure
         case removeTodo(_ todo: Todo)
         case completeTodo(_ todo: Todo)
+        case showAddTodoView
     }
 }

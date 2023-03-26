@@ -12,8 +12,10 @@
 		81A2BEE529CF7024000EEB5D /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 81A2BEE429CF7024000EEB5D /* FirebaseDatabaseSwift */; };
 		81A2BEE829CF719E000EEB5D /* Todos.json in Resources */ = {isa = PBXBuildFile; fileRef = 81A2BEE729CF719E000EEB5D /* Todos.json */; };
 		81A2BEEB29CF7BA6000EEB5D /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEEA29CF7BA6000EEB5D /* TodoService.swift */; };
+		81A2BEED29D0B80E000EEB5D /* Todo+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEEC29D0B80E000EEB5D /* Todo+Utils.swift */; };
+		81A2BEF029D0C4E8000EEB5D /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */; };
 		81BD3E6429CBB56E0068AB07 /* ToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */; };
-		81BD3E6629CBB56E0068AB07 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6529CBB56E0068AB07 /* ContentView.swift */; };
+		81BD3E6629CBB56E0068AB07 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6529CBB56E0068AB07 /* TabContentView.swift */; };
 		81BD3E6829CBB5700068AB07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81BD3E6729CBB5700068AB07 /* Assets.xcassets */; };
 		81BD3E6B29CBB5700068AB07 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81BD3E6A29CBB5700068AB07 /* Preview Assets.xcassets */; };
 		81BD3E7629CBB67E0068AB07 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E7529CBB67E0068AB07 /* CalendarView.swift */; };
@@ -28,7 +30,7 @@
 		81BD3E9029CBDEE60068AB07 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E8F29CBDEE60068AB07 /* LoadingState.swift */; };
 		81BD3E9229CE85730068AB07 /* CategoryIconVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9129CE85730068AB07 /* CategoryIconVIew.swift */; };
 		81BD3E9529CE8C970068AB07 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9429CE8C970068AB07 /* Date+Utils.swift */; };
-		81BD3E9729CE8E8C0068AB07 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9629CE8E8C0068AB07 /* DateFormatter.swift */; };
+		81BD3E9729CE8E8C0068AB07 /* CustomDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9629CE8E8C0068AB07 /* CustomDateFormatter.swift */; };
 		81BD3E9929CE96E10068AB07 /* AddEditTodoView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9829CE96E10068AB07 /* AddEditTodoView+ViewModel.swift */; };
 		81BD3E9B29CE9AEB0068AB07 /* TodoDetailsView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9A29CE9AEB0068AB07 /* TodoDetailsView+ViewModel.swift */; };
 		81BD3E9D29CEC1A40068AB07 /* CalendarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E9C29CEC1A40068AB07 /* CalendarContainerView.swift */; };
@@ -40,9 +42,11 @@
 		81A2BEDF29CF6DAD000EEB5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81A2BEE729CF719E000EEB5D /* Todos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Todos.json; sourceTree = "<group>"; };
 		81A2BEEA29CF7BA6000EEB5D /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
+		81A2BEEC29D0B80E000EEB5D /* Todo+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+Utils.swift"; sourceTree = "<group>"; };
+		81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		81BD3E6029CBB56E0068AB07 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoApp.swift; sourceTree = "<group>"; };
-		81BD3E6529CBB56E0068AB07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		81BD3E6529CBB56E0068AB07 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
 		81BD3E6729CBB5700068AB07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81BD3E6A29CBB5700068AB07 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		81BD3E7529CBB67E0068AB07 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -57,7 +61,7 @@
 		81BD3E8F29CBDEE60068AB07 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		81BD3E9129CE85730068AB07 /* CategoryIconVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconVIew.swift; sourceTree = "<group>"; };
 		81BD3E9429CE8C970068AB07 /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
-		81BD3E9629CE8E8C0068AB07 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		81BD3E9629CE8E8C0068AB07 /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
 		81BD3E9829CE96E10068AB07 /* AddEditTodoView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddEditTodoView+ViewModel.swift"; sourceTree = "<group>"; };
 		81BD3E9A29CE9AEB0068AB07 /* TodoDetailsView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetailsView+ViewModel.swift"; sourceTree = "<group>"; };
 		81BD3E9C29CEC1A40068AB07 /* CalendarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarContainerView.swift; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 				81A2BEEA29CF7BA6000EEB5D /* TodoService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		81A2BEEE29D0C40D000EEB5D /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				81BD3E9C29CEC1A40068AB07 /* CalendarContainerView.swift */,
+				81BD3E9E29CF3B570068AB07 /* CalendarContainerView+ViewModel.swift */,
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 		81BD3E5729CBB56E0068AB07 = {
@@ -146,9 +159,8 @@
 		81BD3E7229CBB6090068AB07 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				81BD3E9C29CEC1A40068AB07 /* CalendarContainerView.swift */,
-				81BD3E9E29CF3B570068AB07 /* CalendarContainerView+ViewModel.swift */,
 				81BD3E7529CBB67E0068AB07 /* CalendarView.swift */,
+				81A2BEEE29D0C40D000EEB5D /* Container */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -175,7 +187,7 @@
 		81BD3E7E29CBBA000068AB07 /* App Level */ = {
 			isa = PBXGroup;
 			children = (
-				81BD3E6529CBB56E0068AB07 /* ContentView.swift */,
+				81BD3E6529CBB56E0068AB07 /* TabContentView.swift */,
 				81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */,
 			);
 			path = "App Level";
@@ -197,9 +209,9 @@
 		81BD3E8529CBBE560068AB07 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				81BD3E8F29CBDEE60068AB07 /* LoadingState.swift */,
 				81BD3E8629CBBE5F0068AB07 /* Todo.swift */,
 				81BD3E8829CBBEEE0068AB07 /* TodoCategory.swift */,
-				81BD3E8F29CBDEE60068AB07 /* LoadingState.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -216,8 +228,10 @@
 		81BD3E9329CE8C840068AB07 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				81BD3E9629CE8E8C0068AB07 /* CustomDateFormatter.swift */,
 				81BD3E9429CE8C970068AB07 /* Date+Utils.swift */,
-				81BD3E9629CE8E8C0068AB07 /* DateFormatter.swift */,
+				81A2BEEC29D0B80E000EEB5D /* Todo+Utils.swift */,
+				81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -309,10 +323,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81BD3E9729CE8E8C0068AB07 /* DateFormatter.swift in Sources */,
+				81BD3E9729CE8E8C0068AB07 /* CustomDateFormatter.swift in Sources */,
 				81BD3E8229CBBB7E0068AB07 /* CardView.swift in Sources */,
-				81BD3E6629CBB56E0068AB07 /* ContentView.swift in Sources */,
+				81BD3E6629CBB56E0068AB07 /* TabContentView.swift in Sources */,
 				81BD3E7829CBB6860068AB07 /* HomeView.swift in Sources */,
+				81A2BEF029D0C4E8000EEB5D /* ViewModelProtocol.swift in Sources */,
 				81BD3E8B29CBCFE20068AB07 /* TodoListCell.swift in Sources */,
 				81BD3E9029CBDEE60068AB07 /* LoadingState.swift in Sources */,
 				81BD3E9D29CEC1A40068AB07 /* CalendarContainerView.swift in Sources */,
@@ -328,6 +343,7 @@
 				81BD3E8429CBBE170068AB07 /* HomeView+ViewModel.swift in Sources */,
 				81BD3E7D29CBB8070068AB07 /* AddEditTodoView.swift in Sources */,
 				81A2BEEB29CF7BA6000EEB5D /* TodoService.swift in Sources */,
+				81A2BEED29D0B80E000EEB5D /* Todo+Utils.swift in Sources */,
 				81BD3E9B29CE9AEB0068AB07 /* TodoDetailsView+ViewModel.swift in Sources */,
 				81BD3E9229CE85730068AB07 /* CategoryIconVIew.swift in Sources */,
 			);
