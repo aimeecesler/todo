@@ -62,11 +62,11 @@ struct CalendarContainerView: View {
         Button(action: {
             viewModel.onAction(.showAddTodoView)
         }) {
-            Image(systemName: "plus.circle")
+            Image.plusCircle
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50)
-                .foregroundColor(.pink)
+                .foregroundColor(.darkPink)
         }
     }
 }

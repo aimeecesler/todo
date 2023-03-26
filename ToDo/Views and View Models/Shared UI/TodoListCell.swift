@@ -29,7 +29,7 @@ struct TodoListCell: View {
             Spacer()
             displayedFlag
         }
-        .foregroundColor(todo.isCompleted ? .red : .black)
+        .foregroundColor(todo.isCompleted ? .deepRed : .black)
         .frame(maxWidth: .infinity)
     }
     
@@ -46,15 +46,15 @@ struct TodoListCell: View {
     }
     
     private var completedFlag: some View {
-        buildFlag(text: "Completed", color: .black)
+        buildFlag(text: "Completed", color: .darkGold)
     }
     
     private var overdueFlag: some View {
-        buildFlag(text: "Overdue", color: .red)
+        buildFlag(text: "Overdue", color: .darkPink)
     }
     
     private var dueTodayFlag: some View {
-        buildFlag(text: "Due Today", color: .mint)
+        buildFlag(text: "Due Today", color: .darkTeal)
     }
     
     private func buildFlag(text: String, color: Color) -> some View {

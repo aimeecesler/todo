@@ -14,6 +14,9 @@
 		81A2BEEB29CF7BA6000EEB5D /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEEA29CF7BA6000EEB5D /* TodoService.swift */; };
 		81A2BEED29D0B80E000EEB5D /* Todo+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEEC29D0B80E000EEB5D /* Todo+Utils.swift */; };
 		81A2BEF029D0C4E8000EEB5D /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */; };
+		81A2BEF229D0D4F6000EEB5D /* Color+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEF129D0D4F5000EEB5D /* Color+Utils.swift */; };
+		81A2BEF429D0D596000EEB5D /* Image+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEF329D0D596000EEB5D /* Image+Utils.swift */; };
+		81A2BEF629D0E6CA000EEB5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A2BEF529D0E6CA000EEB5D /* LaunchScreen.storyboard */; };
 		81BD3E6429CBB56E0068AB07 /* ToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */; };
 		81BD3E6629CBB56E0068AB07 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6529CBB56E0068AB07 /* TabContentView.swift */; };
 		81BD3E6829CBB5700068AB07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81BD3E6729CBB5700068AB07 /* Assets.xcassets */; };
@@ -44,6 +47,9 @@
 		81A2BEEA29CF7BA6000EEB5D /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
 		81A2BEEC29D0B80E000EEB5D /* Todo+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+Utils.swift"; sourceTree = "<group>"; };
 		81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		81A2BEF129D0D4F5000EEB5D /* Color+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Utils.swift"; sourceTree = "<group>"; };
+		81A2BEF329D0D596000EEB5D /* Image+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Utils.swift"; sourceTree = "<group>"; };
+		81A2BEF529D0E6CA000EEB5D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81BD3E6029CBB56E0068AB07 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoApp.swift; sourceTree = "<group>"; };
 		81BD3E6529CBB56E0068AB07 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				81A2BEDF29CF6DAD000EEB5D /* GoogleService-Info.plist */,
+				81A2BEF529D0E6CA000EEB5D /* LaunchScreen.storyboard */,
 				81BD3E6729CBB5700068AB07 /* Assets.xcassets */,
 				81BD3EA029CF3C420068AB07 /* Cache */,
 				81BD3E8529CBBE560068AB07 /* Entities */,
@@ -232,6 +239,8 @@
 				81BD3E9429CE8C970068AB07 /* Date+Utils.swift */,
 				81A2BEEC29D0B80E000EEB5D /* Todo+Utils.swift */,
 				81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */,
+				81A2BEF129D0D4F5000EEB5D /* Color+Utils.swift */,
+				81A2BEF329D0D596000EEB5D /* Image+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -312,6 +321,7 @@
 				81BD3E6B29CBB5700068AB07 /* Preview Assets.xcassets in Resources */,
 				81BD3E6829CBB5700068AB07 /* Assets.xcassets in Resources */,
 				81A2BEE029CF6DAD000EEB5D /* GoogleService-Info.plist in Resources */,
+				81A2BEF629D0E6CA000EEB5D /* LaunchScreen.storyboard in Resources */,
 				81A2BEE829CF719E000EEB5D /* Todos.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +335,7 @@
 			files = (
 				81BD3E9729CE8E8C0068AB07 /* CustomDateFormatter.swift in Sources */,
 				81BD3E8229CBBB7E0068AB07 /* CardView.swift in Sources */,
+				81A2BEF429D0D596000EEB5D /* Image+Utils.swift in Sources */,
 				81BD3E6629CBB56E0068AB07 /* TabContentView.swift in Sources */,
 				81BD3E7829CBB6860068AB07 /* HomeView.swift in Sources */,
 				81A2BEF029D0C4E8000EEB5D /* ViewModelProtocol.swift in Sources */,
@@ -346,6 +357,7 @@
 				81A2BEED29D0B80E000EEB5D /* Todo+Utils.swift in Sources */,
 				81BD3E9B29CE9AEB0068AB07 /* TodoDetailsView+ViewModel.swift in Sources */,
 				81BD3E9229CE85730068AB07 /* CategoryIconVIew.swift in Sources */,
+				81A2BEF229D0D4F6000EEB5D /* Color+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +483,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"todo/Preview Content\"";
@@ -480,8 +493,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -501,6 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"todo/Preview Content\"";
@@ -510,8 +525,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

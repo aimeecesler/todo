@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "NO-TODO-IMG.png",
+      "filename" : "task-icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "NO-TODO-IMG (1).png",
+      "filename" : "task-icon (1).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "NO-TODO-IMG (2).png",
+      "filename" : "task-icon (2).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

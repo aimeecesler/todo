@@ -118,7 +118,7 @@ struct AddEditTodoView: View {
         })
         .buttonBorderShape(.capsule)
         .buttonStyle(.borderedProminent)
-        .tint(.mint)
+        .tint(.darkTeal)
         .frame(maxWidth: .infinity)
         .padding(.bottom, 8)
     }
@@ -128,7 +128,7 @@ struct AddEditTodoView: View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {
-            Image(systemName: "xmark")
+            Image.xmark
         }.buttonStyle(.plain)
     }
     

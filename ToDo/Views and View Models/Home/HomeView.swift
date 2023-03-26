@@ -13,15 +13,17 @@ struct HomeView: View {
     // MARK: Body
     var body: some View {
         NavigationStack {
-            List {
-                completionStatusSection
-                todoListSection
+            VStack {
+                Image.logo
+                List {
+                    completionStatusSection
+                    todoListSection
+                }
             }
             .onAppear {
                 viewModel.onAction(.getTodoList)
             }
             .listStyle(.plain)
-            .navigationTitle(Text("To Do App"))
             .sheet(isPresented: $viewModel.state.showAddTodoView, onDismiss: {
                 viewModel.onAction(.getTodoList)
             }) {
@@ -44,9 +46,9 @@ struct HomeView: View {
     }
     
     private var completedTasksCard: some View {
-        CardView(backgroundColor: .mint) {
+        CardView(backgroundColor: .lightPink) {
             VStack(alignment: .center) {
-                Image(systemName: "flag.checkered.circle.fill")
+                Image.checkeredFlagCircleFill
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
@@ -65,9 +67,9 @@ struct HomeView: View {
     }
     
     private var onTimeCompletedTasksCard: some View {
-        CardView(backgroundColor: .pink) {
+        CardView(backgroundColor: .lightTeal) {
             VStack(alignment: .center) {
-                Image(systemName: "face.smiling.inverse")
+                Image.faceSmiling
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
@@ -96,11 +98,11 @@ struct HomeView: View {
                 Button(action: {
                     viewModel.onAction(.showAddTodoView)
                 }) {
-                    Image(systemName: "plus.circle")
+                    Image.plusCircle
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.darkPink)
                 }
             }
         })
@@ -133,17 +135,17 @@ struct HomeView: View {
                     Button(action: {
                         viewModel.onAction(.completeTodo(todo))
                     }) {
-                        Image(systemName: "checkmark")
-                    }.tint(.mint)
+                        Image.checkmark
+                    }.tint(.darkTeal)
                 }
                 
                 Button(role: .destructive, action: {
                     viewModel.onAction(.removeTodo(todo))
                 }) {
-                    Image(systemName: "trash")
+                    Image.trash
                 }
             }
-        }.tint(.none)
+        }.tint(.darkPink)
     }
     
     // MARK: List States (error, loading, empty)

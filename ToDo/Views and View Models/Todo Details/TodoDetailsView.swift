@@ -82,9 +82,9 @@ struct TodoDetailsView: View {
     
     // MARK: Cards
     private var dueDateCard: some View {
-        CardView(backgroundColor: .mint) {
+        CardView(backgroundColor: .darkTeal) {
             HStack(spacing: 16) {
-                Image(systemName: "clock.circle.fill")
+                Image.clockCircleFill
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -102,9 +102,9 @@ struct TodoDetailsView: View {
     }
     
     private var completedCard: some View {
-        CardView(backgroundColor: .pink) {
+        CardView(backgroundColor: .darkPink) {
             HStack(spacing: 16) {
-                Image(systemName: "party.popper")
+                Image.partyPopper
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -134,7 +134,7 @@ struct TodoDetailsView: View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {
-            Image(systemName: "chevron.left")
+            Image.chevronLeft
         }.foregroundColor(.black)
     }
 }

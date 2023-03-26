@@ -13,14 +13,14 @@ struct TabContentView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Image(systemName: "house")
+                    Image.house
                 }
             CalendarContainerView()
                 .tabItem {
-                    Image(systemName: "calendar")
+                    Image.calendar
                 }
         }
-        .tint(.mint)
+        .tint(.darkTeal)
         .buttonBorderShape(.capsule)
     }
 }

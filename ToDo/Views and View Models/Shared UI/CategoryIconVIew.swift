@@ -14,15 +14,15 @@ struct CategoryIconView: View {
     private var color: Color {
         switch category {
         case .home:
-            return .pink
+            return .darkPink
         case .work:
-            return .orange
+            return .darkGold
         case .kids:
-            return .indigo
+            return .darkBlue
         case .shopping:
-            return .green
+            return .sageGreen
         case .pets:
-            return .yellow
+            return .gold
         }
     }
     
