@@ -32,7 +32,7 @@ struct AddEditTodoView: View {
                     dismissButton
                 }
             }
-            .alert("Whoops!", isPresented: $viewModel.state.showErrorAlert, actions: {
+            .alert(Constants.whoops, isPresented: $viewModel.state.showErrorAlert, actions: {
                 alertActions
             }, message: {
                 alertMessage
@@ -48,13 +48,13 @@ struct AddEditTodoView: View {
     // MARK: Title
     private var titleSection: some View {
         Section(content: {
-            TextField("Title",
+            TextField(Constants.title,
                       text: $viewModel.state.todo.title,
-                      prompt: Text("Enter Title..."))
+                      prompt: Text(Constants.enterTitle))
         }, header: {
-            Text("Title*")
+            Text("\(Constants.title)*")
         }, footer: {
-            Text(viewModel.state.validationState.titleIsValid ? "" : "Title is required.")
+            Text(viewModel.state.validationState.titleIsValid ? "" : Constants.titleRequired)
                 .foregroundColor(.red)
         })
         .onChange(of: viewModel.state.todo.title) { _ in
@@ -68,9 +68,9 @@ struct AddEditTodoView: View {
             TextEditor(text: $viewModel.state.todo.details)
                 .frame(height: 200)
         }, header: {
-            Text("Details*")
+            Text("\(Constants.details)*")
         }, footer: {
-            Text(viewModel.state.validationState.detailIsValid ? "" : "Details are required.")
+            Text(viewModel.state.validationState.detailIsValid ? "" : Constants.detailsRequired)
                 .foregroundColor(.red)
         })
         .onChange(of: viewModel.state.todo.details) { _ in
@@ -80,7 +80,7 @@ struct AddEditTodoView: View {
     
     // MARK: Due Date
     private var dueDateSection: some View {
-        Section("Due Date*") {
+        Section("\(Constants.dueDate)*") {
             DatePicker("",
                        selection: $viewModel.state.todo.dueDate,
                        displayedComponents: .date)
@@ -90,7 +90,7 @@ struct AddEditTodoView: View {
     
     // MARK: Categories
     private var categoriesSection: some View {
-        Section("Categories") {
+        Section(Constants.categories) {
             ForEach(TodoCategory.allCases, id: \.hashValue) { category in
                 HStack {
                     Text(category.rawValue)
@@ -109,7 +109,7 @@ struct AddEditTodoView: View {
         Button(action: {
             viewModel.onAction(.saveTodo)
         }, label: {
-            Text("SAVE")
+            Text(Constants.save)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
                 .font(.title3)
@@ -134,13 +134,13 @@ struct AddEditTodoView: View {
     
     // MARK: Alert
     private var alertMessage: some View {
-        Text("Something seems to have gone wrong saving your todo.")
+        Text(Constants.saveErrorMsg)
             .multilineTextAlignment(.center)
     }
     
     @ViewBuilder
     private var alertActions: some View {
-        Button("Cancel",
+        Button(Constants.cancel,
                role: .cancel,
                action: {
             presentationMode.wrappedValue.dismiss()
@@ -149,7 +149,7 @@ struct AddEditTodoView: View {
         Button(action: {
             viewModel.onAction(.saveTodo)
         }) {
-            Text("Try Again")
+            Text(Constants.tryAgain)
                 .foregroundColor(.red)
         }
     }

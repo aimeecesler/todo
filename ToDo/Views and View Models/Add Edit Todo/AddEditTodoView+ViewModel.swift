@@ -22,7 +22,7 @@ extension AddEditTodoView {
         }
         
         var navigationTitle: String {
-            isNew ? "Add New To Do" : "Edit To Do"
+            isNew ? Constants.addNewTodo : Constants.editTodo
         }
         
         // MARK: Init

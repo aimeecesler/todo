@@ -19,7 +19,6 @@ struct HomeView: View {
                     completionStatusSection
                     todoListSection
                 }
-                .listItemTint(Color.beige)
                 .listStyle(.plain)
             }
             .toolbarBackground(.visible, for: .tabBar)
@@ -62,7 +61,7 @@ struct HomeView: View {
                     .font(.title)
                     .foregroundColor(.white)
                 
-                Text("Completed!")
+                Text("\(Constants.completed)!")
                     .font(.title2)
                     .foregroundColor(.white)
             }
@@ -83,7 +82,7 @@ struct HomeView: View {
                     .font(.title)
                     .foregroundColor(.white)
                 
-                Text("Completed on time!")
+                Text(Constants.completedOnTime)
                     .font(.title2)
                     .foregroundColor(.white)
             }.padding(16)
@@ -97,7 +96,7 @@ struct HomeView: View {
         },
                 header: {
             HStack {
-                Text("My Todo List")
+                Text(Constants.myTodoList)
                 Spacer()
                 Button(action: {
                     viewModel.onAction(.showAddTodoView)
@@ -155,12 +154,12 @@ struct HomeView: View {
     // MARK: List States (error, loading, empty)
     var errorView: some View {
         VStack {
-            Text("Well this is embarassing...")
+            Text(Constants.wellThisIsEmbarrasing)
                 .font(.title2)
             Button(action: {
                 viewModel.onAction(.getTodoList)
             }) {
-                Label("RETRY", systemImage: "arrow.counterclockwise")
+                Label(Constants.retry, systemImage: "arrow.counterclockwise")
                     .foregroundColor(.white)
             }
             .buttonStyle(.borderedProminent)
@@ -175,12 +174,12 @@ struct HomeView: View {
             .scaleEffect(3)
             .listSectionSeparator(.hidden)
             .frame(maxWidth: .infinity)
-            .padding(.top, 24)
+            .padding(.vertical, 24)
     }
     
     var emptyListView: some View {
         VStack {
-            Image("EmptyListImg")
+            Image.emptyList
                 .resizable()
                 .scaledToFit()
                 .frame(height: 300, alignment: .center)

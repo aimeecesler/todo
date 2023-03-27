@@ -22,13 +22,13 @@ extension TodoDetailsView {
         var dueDateMessage: String {
             let daysFromToday = state.todo.dueDate.daysFromToday
             if state.todo.dueToday {
-                return "Due Today!"
+                return Constants.dueToday
             } else if daysFromToday > 0 {
-                let dayString = daysFromToday == 1 ? "Day" : "Days"
-                return "Due in \(daysFromToday) \(dayString)"
+                let dayString = daysFromToday == 1 ? Constants.day : Constants.days
+                return "\(Constants.dueIn) \(daysFromToday) \(dayString)"
             } else {
-                let dayString = daysFromToday == -1 ? "Day" : "Days"
-                return "\(daysFromToday * -1) \(dayString) Overdue"
+                let dayString = daysFromToday == -1 ? Constants.day : Constants.days
+                return "\(daysFromToday * -1) \(dayString) \(Constants.overdue)"
             }
         }
         

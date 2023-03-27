@@ -17,8 +17,8 @@ struct TodoListCell: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 Text(todo.title)
-                Text("Created: \(dateFormatter.getShortDateString(todo.createdOn))")
-                Text("Due: \(dateFormatter.getShortDateString(todo.dueDate))")
+                Text("\(Constants.created): \(dateFormatter.getShortDateString(todo.createdOn))")
+                Text("\(Constants.due): \(dateFormatter.getShortDateString(todo.dueDate))")
                 
                 HStack {
                     ForEach(todo.categories, id: \.hashValue) { category in
@@ -46,15 +46,15 @@ struct TodoListCell: View {
     }
     
     private var completedFlag: some View {
-        buildFlag(text: "Completed", color: .darkGold)
+        buildFlag(text: Constants.completed, color: .darkGold)
     }
     
     private var overdueFlag: some View {
-        buildFlag(text: "Overdue", color: .darkPink)
+        buildFlag(text: Constants.overdue, color: .darkPink)
     }
     
     private var dueTodayFlag: some View {
-        buildFlag(text: "Due Today", color: .darkTeal)
+        buildFlag(text: Constants.dueToday, color: .darkTeal)
     }
     
     private func buildFlag(text: String, color: Color) -> some View {

@@ -34,7 +34,7 @@ struct CalendarContainerView: View {
                     addButton
                 }
             }
-            .navigationTitle("My Calendar")
+            .navigationTitle(Constants.myCalendar)
             .sheet(isPresented: $viewModel.state.showAddTodoView, onDismiss: {
                 viewModel.onAction(.getTodoList)
             }) {
@@ -47,10 +47,12 @@ struct CalendarContainerView: View {
     private var selectedDateTodoList: some View {
         VStack(alignment: .leading) {
             Text(viewModel.selectedDateTitle)
-                .font(.title)
+                .font(.title2)
+                .bold()
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 8)
             if viewModel.state.displayedTodoList.isEmpty {
-                Text("No events for this date")
+                Text(Constants.noEvents)
             } else {
                 ForEach(viewModel.state.displayedTodoList) { todo in
                     NavigationLink(destination: {
@@ -58,9 +60,12 @@ struct CalendarContainerView: View {
                     }, label: {
                         TodoListCell(todo: todo)
                     })
+                    Divider()
                 }
             }
-        }.padding(.horizontal, 16)
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
     }
     
     // MARK: Add Button

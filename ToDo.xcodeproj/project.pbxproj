@@ -17,6 +17,7 @@
 		81A2BEF229D0D4F6000EEB5D /* Color+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEF129D0D4F5000EEB5D /* Color+Utils.swift */; };
 		81A2BEF429D0D596000EEB5D /* Image+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEF329D0D596000EEB5D /* Image+Utils.swift */; };
 		81A2BEF629D0E6CA000EEB5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A2BEF529D0E6CA000EEB5D /* LaunchScreen.storyboard */; };
+		81A2BEF829D25972000EEB5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2BEF729D25972000EEB5D /* Constants.swift */; };
 		81BD3E6429CBB56E0068AB07 /* ToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */; };
 		81BD3E6629CBB56E0068AB07 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD3E6529CBB56E0068AB07 /* TabContentView.swift */; };
 		81BD3E6829CBB5700068AB07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81BD3E6729CBB5700068AB07 /* Assets.xcassets */; };
@@ -50,6 +51,8 @@
 		81A2BEF129D0D4F5000EEB5D /* Color+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Utils.swift"; sourceTree = "<group>"; };
 		81A2BEF329D0D596000EEB5D /* Image+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Utils.swift"; sourceTree = "<group>"; };
 		81A2BEF529D0E6CA000EEB5D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81A2BEF729D25972000EEB5D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		81A2BEF929D26312000EEB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		81BD3E6029CBB56E0068AB07 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BD3E6329CBB56E0068AB07 /* ToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoApp.swift; sourceTree = "<group>"; };
 		81BD3E6529CBB56E0068AB07 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +135,7 @@
 		81BD3E6229CBB56E0068AB07 /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				81A2BEF929D26312000EEB5D /* Info.plist */,
 				81A2BEDF29CF6DAD000EEB5D /* GoogleService-Info.plist */,
 				81A2BEF529D0E6CA000EEB5D /* LaunchScreen.storyboard */,
 				81BD3E6729CBB5700068AB07 /* Assets.xcassets */,
@@ -241,6 +245,7 @@
 				81A2BEEF29D0C4E8000EEB5D /* ViewModelProtocol.swift */,
 				81A2BEF129D0D4F5000EEB5D /* Color+Utils.swift */,
 				81A2BEF329D0D596000EEB5D /* Image+Utils.swift */,
+				81A2BEF729D25972000EEB5D /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				81BD3E7829CBB6860068AB07 /* HomeView.swift in Sources */,
 				81A2BEF029D0C4E8000EEB5D /* ViewModelProtocol.swift in Sources */,
 				81BD3E8B29CBCFE20068AB07 /* TodoListCell.swift in Sources */,
+				81A2BEF829D25972000EEB5D /* Constants.swift in Sources */,
 				81BD3E9029CBDEE60068AB07 /* LoadingState.swift in Sources */,
 				81BD3E9D29CEC1A40068AB07 /* CalendarContainerView.swift in Sources */,
 				81BD3E8729CBBE5F0068AB07 /* Todo.swift in Sources */,
@@ -490,7 +496,7 @@
 				DEVELOPMENT_TEAM = 3MY45Q6Y9D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = ToDo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -522,7 +528,7 @@
 				DEVELOPMENT_TEAM = 3MY45Q6Y9D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = ToDo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

@@ -111,7 +111,7 @@ struct TodoDetailsView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                Text("Completed!")
+                Text("\(Constants.completed)!")
                     .font(.title)
                     .bold()
             }
@@ -125,7 +125,7 @@ struct TodoDetailsView: View {
         Button(action: {
             viewModel.onAction(.showEditDetailsView)
         }) {
-            Text("EDIT")
+            Text(Constants.edit)
                 .kerning(2)
         }
         .disabled(viewModel.editButtonIsDisabled)
