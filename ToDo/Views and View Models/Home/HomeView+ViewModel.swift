@@ -27,7 +27,7 @@ extension HomeView {
         var onTimeCompletionRate: Double {
             let completedOnTime = state.todoList.filter {
                 guard let completedDate = $0.completedOn else { return false }
-                return completedDate <= $0.dueDate
+                return completedDate.startOfDay <= $0.dueDate.startOfDay
             }
             
             let completion = Double(completedOnTime.count) / completedCount * 100
